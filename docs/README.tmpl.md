@@ -16,7 +16,6 @@
 
 ## Assemble plugins
 {%= _.include("related-repos.md") %}
-Visit [assemble.io/plugins](http:/assemble.io/plugins/) for more information about [Assemble](http:/assemble.io/) plugins.
 
 ## Authors
 {%= _.contrib("authors.md") %}
