@@ -1,7 +1,7 @@
 {
   "name": "assemble-contrib-download",
   "description": "Assemble plugin for downloading files from GitHub.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": "https://github.com/assemble/assemble-contrib-download",
   "author": {
     "name": "Jon Schlinkert",
@@ -29,13 +29,17 @@
   },
   "dependencies": {
     "lodash": "~2.3.0",
-    "request": "~2.27.0"
+    "request": "~2.27.0",
+    "async": "~0.2.10",
+    "request-progress": "~0.3.1",
+    "fs-utils": "~0.3.6"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-contrib-jshint": "~0.7.1",
     "grunt-readme": "~0.4.0",
-    "grunt-repos": "~0.1.2"
+    "grunt-repos": "~0.1.2",
+    "assemble": "~0.4.35"
   },
   "keywords": [
     "assemble",

@@ -19,6 +19,23 @@ module.exports = function(grunt) {
       }
     },
 
+    assemble: {
+      options: {
+        plugins: ['index.js'],
+        download: {
+          repo: 'assemble/handlebars-helpers',
+          files: ['docs/helpers.zip'],
+          dest: 'tmp/'
+        }
+      },
+      test: {
+        files: {
+          // arbitrary file
+          'test/actual/test.html': ['test/fixtures/test.hbs']
+        }
+      }
+    },
+
     /**
      * Pull down a list of repos from Github.
      * (bundled with the readme task)
@@ -52,6 +69,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-readme');
   grunt.loadNpmTasks('grunt-repos');
+  grunt.loadNpmTasks('assemble');
 
 
   // By default, lint and run all tests.

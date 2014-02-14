@@ -7,12 +7,15 @@
  */
 
 // Node.js
-var path    = require('path');
-var fs      = require('fs');
+var path     = require('path');
+var fs       = require('fs');
 
 // node_modules
-var request = require('request');
-var _       = require('lodash');
+var async    = require('async');
+var file     = require('fs-utils');
+var request  = require('request');
+var progress = require('request-progress');
+var _        = require('lodash');
 
 
 // Run this plugin before the 'configuration' stage.
@@ -49,14 +52,16 @@ var plugin = function(params, callback) {
       files: ['docs/helpers.zip']
     }, download, config);
 
-    var user = download.user;
-    var repo = download.repo;
+    if(!file.exists(download.dest)) {
+      file.mkdirpSync(download.dest)
+    }
 
-    grunt.util.async.forEach(download.files, function (file, next) {
+    async.forEach(download.files, function (file, next) {
       var filename = path.basename(file);
+      var fullpath = 'https://github.com/' + download.repo + '/blob/master/' + file + '?raw=true';
 
-      // Download the given files
-      request('https://github.com/' + repo + '/blob/master/' + file + '?raw=true')
+      // Download the specified file(s)
+      request(fullpath)
       .pipe(fs.createWriteStream(path.join(download.dest, filename)))
       .on('close', function () {
         grunt.log.writeln('>> Downloaded:'.green, path.join(download.dest, filename) + ' OK'.green);
