@@ -12,10 +12,18 @@ var fs       = require('fs');
 
 // node_modules
 var async    = require('async');
+var chalk    = require('chalk');
 var file     = require('fs-utils');
 var request  = require('request');
 var progress = require('request-progress');
 var _        = require('lodash');
+
+
+// Console colors
+var bold     = chalk.bold;
+var success  = chalk.green;
+var error    = chalk.red;
+var info     = chalk.cyan;
 
 
 // Run this plugin before the 'configuration' stage.
@@ -23,6 +31,7 @@ var config = {
   stage: 'options:pre:configuration',
 };
 
+var ran = false;
 
 /**
  * 'Download' Plugin
@@ -35,15 +44,16 @@ var plugin = function(params, callback) {
 
   var grunt    = params.grunt;
   var assemble = params.assemble;
-
   var download = assemble.options.download || {};
 
   // If this plugin has already run, skip it.
   if(grunt.config.get('plugin.download.done') === undefined) {
 
-    grunt.log.subhead('Running:'.bold, '"assemble-contrib-download"');
-    grunt.log.writeln('Stage:  '.bold, '"options:pre:configuration"\n');
-    grunt.log.writeln('This may take a moment, files are downloading...');
+    console.log();
+    console.log(bold('  Running:'), '"assemble-contrib-download"');
+    console.log(bold('  Stage:  '), '"options:pre:configuration"');
+    console.log('\nThis may take a moment, files are downloading...');
+    console.log();
 
     // Plugin defaults.
     download = _.extend({
@@ -53,18 +63,26 @@ var plugin = function(params, callback) {
     }, download, config);
 
     if(!file.exists(download.dest)) {
-      file.mkdirpSync(download.dest)
+      file.mkdirpSync(download.dest);
     }
 
-    async.forEach(download.files, function (file, next) {
-      var filename = path.basename(file);
-      var fullpath = 'https://github.com/' + download.repo + '/blob/master/' + file + '?raw=true';
+    async.forEach(download.files, function (filepath, next) {
+      var filename = path.basename(filepath);
+      var fullpath = 'https://github.com/' + download.repo + '/blob/master/' + filepath + '?raw=true';
+      var dest = file.normalizeSlash(path.join(download.dest, filename));
 
       // Download the specified file(s)
-      request(fullpath)
-      .pipe(fs.createWriteStream(path.join(download.dest, filename)))
+      progress(request(fullpath))
+      .on('progress', function (state) {
+        console.log(bold('  received size in bytes'), info(state.received));
+        console.log(bold('  percent'), info(state.percent));
+        console.log(bold('  percent'), info('100'), success('OK'));
+        console.log(bold('  total received (bytes)'), info(state.received));
+        console.log();
+      })
+      .pipe(fs.createWriteStream(dest))
       .on('close', function () {
-        grunt.log.writeln('>> Downloaded:'.green, path.join(download.dest, filename) + ' OK'.green);
+        console.log(success('>> Downloaded:'), dest + success(' OK'));
         next();
       });
     }, function () {
