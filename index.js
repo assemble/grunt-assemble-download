@@ -97,6 +97,8 @@ var plugin = function(params, callback) {
       grunt.config.set('plugin.download.done', true);
       callback();
     });
+  } else {
+    callback();
   }
 };
 
