@@ -71,6 +71,7 @@ var plugin = function(params, callback) {
       var fullpath = 'https://github.com/' + download.repo + '/blob/master/' + filepath + '?raw=true';
       var dest = file.normalizeSlash(path.join(download.dest, filename));
 
+      var error = false;
       // Download the specified file(s)
       progress(request(fullpath))
       .on('progress', function (state) {
@@ -83,9 +84,16 @@ var plugin = function(params, callback) {
       .pipe(fs.createWriteStream(dest))
       .on('close', function () {
         console.log(success('>> Downloaded:'), dest + success(' OK'));
-        next();
+        if (!error) {
+          next();
+        }
+      })
+      .on('error', function (err) {
+        error = true;
+        console.log(error('>> Error:'), err);
+        next(err);
       });
-    }, function () {
+    }, function (err) {
       grunt.config.set('plugin.download.done', true);
       callback();
     });

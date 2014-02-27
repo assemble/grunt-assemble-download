@@ -37,6 +37,18 @@ module.exports = function(grunt) {
     },
 
     /**
+     * Run mocha tests.
+     */
+    mochaTest: {
+      tests: {
+        options: {
+          reporter: 'progress'
+        },
+        src: ['test/**/*_test.js']
+      }
+    },
+
+    /**
      * Pull down a list of repos from Github.
      * (bundled with the readme task)
      */
@@ -67,11 +79,12 @@ module.exports = function(grunt) {
 
   // These plugins provide necessary tasks.
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-readme');
   grunt.loadNpmTasks('grunt-repos');
   grunt.loadNpmTasks('assemble');
 
 
   // By default, lint and run all tests.
-  grunt.registerTask('default', ['jshint', 'readme']);
+  grunt.registerTask('default', ['jshint', 'mochaTest', 'assemble', 'readme']);
 };
