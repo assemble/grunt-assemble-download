@@ -1,4 +1,4 @@
-# assemble-contrib-download [![NPM version](https://badge.fury.io/js/assemble-contrib-download.png)](http://badge.fury.io/js/assemble-contrib-download)
+# assemble-middleware-download [![NPM version](https://badge.fury.io/js/assemble-middleware-download.png)](http://badge.fury.io/js/assemble-middleware-download)
 
 > Assemble plugin for downloading files from GitHub.
 
@@ -8,7 +8,7 @@
 In the command line, run:
 
 ```bash
-npm install assemble-contrib-download --save
+npm install assemble-middleware-download --save
 ```
 
 Next, to register the plugin with Assemble in your project's Gruntfile you can either specify the direct path to the plugin(s) (e.g. `./path/to/plugins/*.js`), or if installed via npm, make sure the plugin is in the `devDependencies` of your project.js package.json, and simply add the module's name to the `plugins` option:
@@ -16,7 +16,7 @@ Next, to register the plugin with Assemble in your project's Gruntfile you can e
 ```js
 assemble: {
   options: {
-    plugins: ['assemble-contrib-download', 'other/plugins/*.js']
+    plugins: ['assemble-middleware-download', 'other/plugins/*.js']
   }
 }
 ```
@@ -47,7 +47,7 @@ Paths the file or files to download.
 ```js
 assemble: {
   options: {
-    plugins: ['assemble-contrib-download'],
+    plugins: ['assemble-middleware-download'],
     download: {
       repo: 'assemble/handlebars-helpers',
       files: ['docs/helpers.zip'],
@@ -59,7 +59,7 @@ assemble: {
 
 
 ## Contributing
-Find a bug? Have a feature request? Please [create an Issue](https://github.com/assemble/assemble-contrib-download/issues).
+Find a bug? Have a feature request? Please [create an Issue](https://github.com/assemble/assemble-middleware-download/issues).
 
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality,
 and run `docs` in the command line to build the docs with [Verb](https://github.com/assemble/verb).
