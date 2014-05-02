@@ -26,83 +26,80 @@ var error    = chalk.red;
 var info     = chalk.cyan;
 
 
-// Run this plugin before the 'configuration' stage.
-var config = {
-  stage: 'options:pre:configuration',
-};
-
 var ran = false;
 
-/**
- * 'Download' Plugin
- * @param  {Object}   params
- * @param  {Function} callback
- */
-var plugin = function(params, callback) {
-
+module.exports = function (assemble) {
   'use strict';
 
-  var grunt    = params.grunt;
-  var assemble = params.assemble;
-  var download = assemble.options.download || {};
+  var grunt = assemble.config.grunt;
+  var download = assemble.config.download || {};
 
-  // If this plugin has already run, skip it.
-  if(grunt.config.get('plugin.download.done') === undefined) {
+  /**
+   * 'Download' Middleware
+   * @param  {Object}   params
+   * @param  {Function} callback
+   */
+  var middleware = function(params, callback) {
 
-    console.log();
-    console.log(bold('  Running:'), '"assemble-contrib-download"');
-    console.log(bold('  Stage:  '), '"options:pre:configuration"');
-    console.log('\nThis may take a moment, files are downloading...');
-    console.log();
+    // If this middleware has already run, skip it.
+    if(grunt.config.get('middleware.download.done') === undefined) {
 
-    // Plugin defaults.
-    download = _.extend({
-      repo: 'assemble/handlebars-helpers',
-      dest: 'tmp/',
-      files: ['docs/helpers.zip']
-    }, download, config);
+      console.log();
+      console.log(bold('  Running:'), '"assemble-contrib-download"');
+      console.log(bold('  Stage:  '), '"options:pre:configuration"');
+      console.log('\nThis may take a moment, files are downloading...');
+      console.log();
 
-    if(!file.exists(download.dest)) {
-      file.mkdirpSync(download.dest);
-    }
+      // Plugin defaults.
+      download = _.extend({
+        repo: 'assemble/handlebars-helpers',
+        dest: 'tmp/',
+        files: ['docs/helpers.zip']
+      }, download);
 
-    async.forEach(download.files, function (filepath, next) {
-      var filename = path.basename(filepath);
-      var fullpath = 'https://github.com/' + download.repo + '/blob/master/' + filepath + '?raw=true';
-      var dest = file.normalizeSlash(path.join(download.dest, filename));
+      if(!file.exists(download.dest)) {
+        file.mkdirpSync(download.dest);
+      }
 
-      var error = false;
-      // Download the specified file(s)
-      progress(request(fullpath))
-      .on('progress', function (state) {
-        console.log(bold('  received size in bytes'), info(state.received));
-        console.log(bold('  percent'), info(state.percent));
-        console.log(bold('  percent'), info('100'), success('OK'));
-        console.log(bold('  total received (bytes)'), info(state.received));
-        console.log();
-      })
-      .pipe(fs.createWriteStream(dest))
-      .on('close', function () {
-        console.log(success('>> Downloaded:'), dest + success(' OK'));
-        if (!error) {
-          next();
-        }
-      })
-      .on('error', function (err) {
-        error = true;
-        console.log(error('>> Error:'), err);
-        next(err);
+      async.forEach(download.files, function (filepath, next) {
+        var filename = path.basename(filepath);
+        var fullpath = 'https://github.com/' + download.repo + '/blob/master/' + filepath + '?raw=true';
+        var dest = file.normalizeSlash(path.join(download.dest, filename));
+
+        var error = false;
+        // Download the specified file(s)
+        progress(request(fullpath))
+        .on('progress', function (state) {
+          console.log(bold('  received size in bytes'), info(state.received));
+          console.log(bold('  percent'), info(state.percent));
+          console.log(bold('  percent'), info('100'), success('OK'));
+          console.log(bold('  total received (bytes)'), info(state.received));
+          console.log();
+        })
+        .pipe(fs.createWriteStream(dest))
+        .on('close', function () {
+          console.log(success('>> Downloaded:'), dest + success(' OK'));
+          if (!error) {
+            next();
+          }
+        })
+        .on('error', function (err) {
+          error = true;
+          console.log(error('>> Error:'), err);
+          next(err);
+        });
+      }, function (err) {
+        grunt.config.set('middleware.download.done', true);
+        callback();
       });
-    }, function (err) {
-      grunt.config.set('plugin.download.done', true);
+    } else {
       callback();
-    });
-  } else {
-    callback();
-  }
+    }
+  };
+
+  middleware.event = 'assemble:before:configuration';
+
+  return {
+    'assemble-middleware-download': middleware
+  };
 };
-
-
-// export the plugin and options.
-plugin.options = config;
-module.exports = plugin;

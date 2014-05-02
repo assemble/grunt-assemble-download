@@ -40,10 +40,10 @@
     "grunt-contrib-jshint": "~0.7.1",
     "grunt-readme": "~0.4.0",
     "grunt-repos": "~0.1.2",
-    "assemble": "~0.4.35",
     "grunt-mocha-test": "~0.9.3",
     "chai": "~1.9.0",
-    "grunt-verb": "~0.2.2"
+    "grunt-verb": "~0.2.2",
+    "grunt-assemble": "^0.1.12"
   },
   "keywords": [
     "assemble",
