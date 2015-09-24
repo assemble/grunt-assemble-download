@@ -3,10 +3,7 @@
   "description": "Assemble plugin for downloading files from GitHub.",
   "version": "0.2.0",
   "homepage": "https://github.com/assemble/grunt-assemble-download",
-  "author": {
-    "name": "Jon Schlinkert",
-    "url": "http://github.com/jonschlinkert/"
-  },
+  "author": "Jon Schlinkert (http://github.com/jonschlinkert)",
   "repository": {
     "type": "git",
     "url": "git://github.com/assemble/grunt-assemble-download.git"
@@ -52,5 +49,16 @@
     "assemble contrib",
     "download",
     "grunt"
-  ]
+  ],
+  "verb": {
+    "related": {
+      "list": [
+        "grunt-assemble",
+        "grunt-assemble-anchors",
+        "grunt-assemble-contextual",
+        "grunt-assemble-decompress",
+        "grunt-assemble-download"
+      ]
+    }
+  }
 }

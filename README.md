@@ -1,14 +1,13 @@
-# assemble-middleware-download [![NPM version](https://badge.fury.io/js/assemble-middleware-download.png)](http://badge.fury.io/js/assemble-middleware-download)
+# grunt-assemble-download [![NPM version](https://badge.fury.io/js/grunt-assemble-download.svg)](http://badge.fury.io/js/grunt-assemble-download)
 
 > Assemble plugin for downloading files from GitHub.
 
-**Upgrade notice!**: as of v0.2.0, _this middlweare requires Assemble v0.5.0._`
-
 ## Quickstart
+
 In the command line, run:
 
 ```bash
-npm install assemble-middleware-download --save
+npm install grunt-assemble-download --save
 ```
 
 Next, to register the plugin with Assemble in your project's Gruntfile you can either specify the direct path to the plugin(s) (e.g. `./path/to/plugins/*.js`), or if installed via npm, make sure the plugin is in the `devDependencies` of your project.js package.json, and simply add the module's name to the `plugins` option:
@@ -16,38 +15,42 @@ Next, to register the plugin with Assemble in your project's Gruntfile you can e
 ```js
 assemble: {
   options: {
-    plugins: ['assemble-middleware-download', 'other/plugins/*.js']
+    plugins: ['grunt-assemble-download', 'other/plugins/*.js']
   }
 }
 ```
+
 Visit the [plugins docs](http://assemble.io/plugins/) for more info or for help getting started.
 
-
 ## Options
-### repo
+
+## repo
+
 Type: `String`
 Default: `assemble/handlebars-helpers`
 
 Repo from which to download files.
 
-### dest
+## dest
+
 Type: `String`
 Default: `tmp/`
 
 Destination for the downloaded files.
 
-### files
+## files
+
 Type: `Array`
 Default: `['docs/helpers.zip']`
 
 Paths the file or files to download.
 
-
 ## Usage Examples
+
 ```js
 assemble: {
   options: {
-    plugins: ['assemble-middleware-download'],
+    plugins: ['grunt-assemble-download'],
     download: {
       repo: 'assemble/handlebars-helpers',
       files: ['docs/helpers.zip'],
@@ -57,30 +60,16 @@ assemble: {
 }
 ```
 
+## Assemble plugins
+
+* [grunt-assemble](https://www.npmjs.com/package/grunt-assemble): Static site generator for Grunt.js, Yeoman and Node.js. Used by Zurb Foundation, Zurb Ink, H5BP/Effeckt,… [more](https://www.npmjs.com/package/grunt-assemble) | [homepage](http://assemble.io)
+* [grunt-assemble-anchors](https://www.npmjs.com/package/grunt-assemble-anchors): Assemble plugin for creating anchor tags from headings in generated html using Cheerio.js. | [homepage](https://github.com/assemble/grunt-assemble-anchors)
+* [grunt-assemble-contextual](https://www.npmjs.com/package/grunt-assemble-contextual): Generates a JSON file with the context of each page. Basic plugin to help see… [more](https://www.npmjs.com/package/grunt-assemble-contextual) | [homepage](https://github.com/assemble/grunt-assemble-contextual)
+* [grunt-assemble-decompress](https://www.npmjs.com/package/grunt-assemble-decompress): Assemble plugin for extracting zip, tar and tar.gz archives. | [homepage](https://github.com/assemble/grunt-assemble-decompress)
 
 ## Contributing
-Find a bug? Have a feature request? Please [create an Issue](https://github.com/assemble/assemble-middleware-download/issues).
 
-In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality,
-and run `docs` in the command line to build the docs with [Verb](https://github.com/assemble/verb).
-
-Pull requests are also encouraged, and if you find this project useful please consider "starring" it to show your support! Thanks!
-
-## Assemble plugins
-Here are some related projects you might be interested in from the [Assemble](http://assemble.io) core team.
-
-+ [assemble-contrib-anchors](https://github.com/assemble/assemble-contrib-anchors): Assemble plugin for creating anchor tags from generated html. 
-+ [assemble-contrib-contextual](https://github.com/assemble/assemble-contrib-contextual): Generates a JSON file containing the context of each page. Basic plugin to help see what's happening in the build. 
-+ [assemble-contrib-decompress](https://github.com/assemble/assemble-contrib-decompress): Assemble plugin for extracting zip, tar and tar.gz archives.  
-+ [assemble-contrib-lunr](https://github.com/assemble/assemble-contrib-lunr): Assemble plugin for creating a search engine within your static site using lunr.js. 
-+ [assemble-contrib-markdown](https://github.com/assemble/assemble-contrib-markdown): Convert markdown files to HTML using marked.js. This plugin is an alternative to Assemble's markdown Handlebars helpers. Both are useful in different scenarios. 
-+ [assemble-contrib-permalinks](https://github.com/assemble/assemble-contrib-permalinks): Permalinks plugin for Assemble, the static site generator for Grunt.js and Yeoman. This plugin enables powerful and configurable URI replacement patterns, presets, uses Moment.js for parsing dates, and much more. 
-+ [assemble-contrib-sitemap](https://github.com/assemble/assemble-contrib-sitemap): Sitemap generator plugin for Assemble 
-+ [assemble-contrib-toc](https://github.com/assemble/assemble-contrib-toc): Create a table of contents in the generated HTML, using Cheerio.js 
-+ [assemble-contrib-wordcount](https://github.com/assemble/assemble-contrib-wordcount): Assemble plugin for displaying a word-count on blog posts or pages. 
-
-Visit [assemble.io/plugins](http:/assemble.io/plugins/) for more information about [Assemble](http:/assemble.io/) plugins.
-
+Pull requests and stars are always welcome. For bugs and feature requests, [please create an issue](https://github.com/assemble/grunt-assemble-download/issues/new).
 
 ## Authors
 
@@ -89,16 +78,11 @@ Visit [assemble.io/plugins](http:/assemble.io/plugins/) for more information abo
 + [github/jonschlinkert](https://github.com/jonschlinkert)
 + [twitter/jonschlinkert](http://twitter.com/jonschlinkert)
 
-**Brian Woodward**
-
-+ [github/doowb](https://github.com/doowb)
-+ [twitter/doowb](http://twitter.com/doowb)
-
-
 ## License
-Copyright (c) 2014 Jon Schlinkert, contributors.  
-Released under the MIT license
+
+Copyright © 2015 Jon Schlinkert
+Released under the MIT license.
 
 ***
 
-_This file was generated by [grunt-verb](https://github.com/assemble/grunt-verb) on May 29, 2014._
+_This file was generated by [verb-cli](https://github.com/assemble/verb-cli) on September 24, 2015._
