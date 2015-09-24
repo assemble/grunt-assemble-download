@@ -1,11 +1,8 @@
-/**
- * Assemble
+/*!
+ * grunt-assemble-download <https://github.com/assemble/grunt-assemble-download>
  *
- * Assemble <http://assemble.io>
- * Created and maintained by Jon Schlinkert and Brian Woodward
- *
- * Copyright (c) 2014 Assemble.
- * Licensed under the MIT License (MIT).
+ * Copyright (c) 2014-2015, Jon Schlinkert.
+ * Licensed under the MIT License.
  */
 
 var expect = require('chai').expect
