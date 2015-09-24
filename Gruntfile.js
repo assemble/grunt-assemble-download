@@ -1,6 +1,6 @@
 /*
- * assemble-contrib-download
- * https://github.com/assemble/assemble-contrib-download
+ * grunt-assemble-download
+ * https://github.com/assemble/grunt-assemble-download
  *
  * Copyright (c) 2013 Jon Schlinkert, Brian Woodward, contributors
  * Licensed under the MIT license.

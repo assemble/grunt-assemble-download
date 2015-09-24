@@ -1,7 +1,7 @@
 'use strict';
 /*
- * assemble-contrib-download
- * http://github.com/assemble/assemble-contrib-download
+ * grunt-assemble-download
+ * http://github.com/assemble/grunt-assemble-download
  *
  * Copyright (c) 2013 Jon Schlinkert, contributors
  * MIT License
@@ -49,7 +49,7 @@ var plugin = function(params, callback) {
   if(grunt.config.get('plugin.download.done') === undefined) {
 
     console.log();
-    console.log(bold('  Running:'), '"assemble-contrib-download"');
+    console.log(bold('  Running:'), '"grunt-assemble-download"');
     console.log(bold('  Stage:  '), '"options:pre:configuration"');
     console.log('\nThis may take a moment, files are downloading...');
     console.log();
